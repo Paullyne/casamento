@@ -8,35 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Wedding Theme - Romantic & Elegant Colors */
+    --background: 350 20% 99%;
+    --foreground: 345 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 350 25% 98%;
+    --card-foreground: 345 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 350 25% 98%;
+    --popover-foreground: 345 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Rose Gold & Blush Pink Primary */
+    --primary: 345 35% 60%;
+    --primary-foreground: 350 20% 99%;
+    --primary-glow: 345 50% 75%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Champagne Gold Secondary */
+    --secondary: 45 25% 90%;
+    --secondary-foreground: 345 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Sage Green Muted */
+    --muted: 120 15% 92%;
+    --muted-foreground: 120 8% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Dusty Rose Accent */
+    --accent: 340 25% 85%;
+    --accent-foreground: 345 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 350 20% 99%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 340 15% 88%;
+    --input: 340 15% 88%;
+    --ring: 345 35% 60%;
 
-    --radius: 0.5rem;
+    /* Wedding-specific design tokens */
+    --gradient-romantic: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-champagne: linear-gradient(180deg, hsl(var(--secondary)), hsl(45 35% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.95), hsl(var(--accent) / 0.8));
+    
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.15);
+    --shadow-soft: 0 4px 20px hsl(var(--primary) / 0.08);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
+
+    --transition-romantic: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-quick: all 0.2s ease-out;
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +118,81 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-elegant {
+    @apply bg-accent/20 text-accent-foreground border border-accent/30 backdrop-blur-sm hover:bg-accent/30 transition-all duration-300;
+  }
+
+  /* Card Enhancements */
+  .card-romantic {
+    @apply bg-gradient-to-br from-card via-card to-accent/5 shadow-soft backdrop-blur-sm border border-accent/20;
+  }
+  
+  .card-glass {
+    @apply bg-card/60 backdrop-blur-lg border border-accent/30 shadow-elegant;
+  }
+
+  /* Animation Classes */
+  .animate-romantic {
+    animation: romanticFloat 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: softGlow 4s ease-in-out infinite alternate;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+
+  /* Text Gradients */
+  .text-gradient-romantic {
+    @apply bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-secondary via-yellow-300 to-secondary bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .font-romantic {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-elegant {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@keyframes romanticFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+  75% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+@keyframes softGlow {
+  0% { box-shadow: 0 0 20px hsl(var(--primary) / 0.1); }
+  100% { box-shadow: 0 0 40px hsl(var(--primary-glow) / 0.3), 0 0 60px hsl(var(--primary) / 0.1); }
+}
+
+@keyframes fadeUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
   }
 }
