@@ -120,6 +120,33 @@ export type Database = {
         }
         Relationships: []
       }
+      guest_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          is_approved: boolean | null
+          photo_url: string
+          uploaded_by: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          photo_url: string
+          uploaded_by: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          photo_url?: string
+          uploaded_by?: string
+        }
+        Relationships: []
+      }
       likes: {
         Row: {
           created_at: string
@@ -460,6 +487,45 @@ export type Database = {
           },
         ]
       }
+      rsvps: {
+        Row: {
+          attending: boolean
+          created_at: string
+          dietary_restrictions: string | null
+          email: string | null
+          guest_name: string
+          id: string
+          message: string | null
+          phone: string | null
+          plus_ones: number | null
+          updated_at: string
+        }
+        Insert: {
+          attending: boolean
+          created_at?: string
+          dietary_restrictions?: string | null
+          email?: string | null
+          guest_name: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          plus_ones?: number | null
+          updated_at?: string
+        }
+        Update: {
+          attending?: boolean
+          created_at?: string
+          dietary_restrictions?: string | null
+          email?: string | null
+          guest_name?: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          plus_ones?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       saves: {
         Row: {
           collection_id: string | null
@@ -560,6 +626,87 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      wedding_events: {
+        Row: {
+          additional_info: string | null
+          bride_name: string
+          created_at: string
+          dress_code: string | null
+          groom_name: string
+          id: string
+          updated_at: string
+          venue_address: string
+          venue_coordinates: unknown | null
+          venue_name: string
+          wedding_date: string
+        }
+        Insert: {
+          additional_info?: string | null
+          bride_name: string
+          created_at?: string
+          dress_code?: string | null
+          groom_name: string
+          id?: string
+          updated_at?: string
+          venue_address: string
+          venue_coordinates?: unknown | null
+          venue_name: string
+          wedding_date: string
+        }
+        Update: {
+          additional_info?: string | null
+          bride_name?: string
+          created_at?: string
+          dress_code?: string | null
+          groom_name?: string
+          id?: string
+          updated_at?: string
+          venue_address?: string
+          venue_coordinates?: unknown | null
+          venue_name?: string
+          wedding_date?: string
+        }
+        Relationships: []
+      }
+      wedding_gifts: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_purchased: boolean | null
+          name: string
+          price: number
+          purchased_by: string | null
+          qr_code_data: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_purchased?: boolean | null
+          name: string
+          price: number
+          purchased_by?: string | null
+          qr_code_data?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_purchased?: boolean | null
+          name?: string
+          price?: number
+          purchased_by?: string | null
+          qr_code_data?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {
