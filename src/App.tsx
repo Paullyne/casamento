@@ -7,6 +7,8 @@ import { Layout } from "@/components/Layout";
 import WeddingHome from "./pages/WeddingHome";
 import RSVPPage from "./pages/RSVPPage";
 import GiftsPage from "./pages/GiftsPage";
+import GalleryPage from "./pages/GalleryPage";
+import VenuePage from "./pages/VenuePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
             <Route index element={<WeddingHome />} />
             <Route path="rsvp" element={<RSVPPage />} />
             <Route path="gifts" element={<GiftsPage />} />
+            <Route path="gallery" element={<GalleryPage />} />
+            <Route path="venue" element={<VenuePage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Route>
