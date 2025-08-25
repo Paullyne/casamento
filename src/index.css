@@ -125,8 +125,12 @@ All colors MUST be HSL.
 @layer components {
   /* Hero Button Variants */
   .btn-hero {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground hover:shadow-glow transition-all duration-300 transform hover:scale-105;
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground transition-all duration-300 transform hover:scale-105;
     box-shadow: var(--shadow-elegant);
+  }
+  
+  .btn-hero:hover {
+    box-shadow: var(--shadow-glow);
   }
   
   .btn-elegant {
