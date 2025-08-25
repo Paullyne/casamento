@@ -139,11 +139,13 @@ All colors MUST be HSL.
 
   /* Card Enhancements */
   .card-romantic {
-    @apply bg-gradient-to-br from-card via-card to-accent/5 shadow-soft backdrop-blur-sm border border-accent/20;
+    @apply bg-gradient-to-br from-card via-card to-accent/5 backdrop-blur-sm border border-accent/20;
+    box-shadow: var(--shadow-soft);
   }
   
   .card-glass {
-    @apply bg-card/60 backdrop-blur-lg border border-accent/30 shadow-elegant;
+    @apply bg-card/60 backdrop-blur-lg border border-accent/30;
+    box-shadow: var(--shadow-elegant);
   }
 
   /* Animation Classes */
