@@ -32,6 +32,8 @@ export default function WeddingHome() {
       const { data, error } = await supabase
         .from('wedding_events')
         .select('*')
+        .order('created_at', { ascending: false })
+        .limit(1)
         .single();
 
       if (error) throw error;
