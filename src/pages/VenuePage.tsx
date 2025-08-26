@@ -71,7 +71,7 @@ export default function VenuePage() {
 
   const openWaze = () => {
     const address = encodeURIComponent(weddingData.venue_address);
-    window.open(`https://waze.com/ul?q=${address}`, '_blank');
+    window.open(`https://www.waze.com/ul?q=${address}&navigate=yes`, '_blank');
   };
 
   return (
@@ -216,7 +216,7 @@ export default function VenuePage() {
           
           <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden">
             <iframe
-              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dO4NV4-7C8qGQs&q=${encodeURIComponent(weddingData.venue_address)}`}
+              src={`https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=pt&amp;q=${encodeURIComponent(weddingData.venue_address)}&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0 }}
