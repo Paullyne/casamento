@@ -35,7 +35,7 @@ export default function GalleryPage() {
       const { data, error } = await supabase
         .from('guest_photos')
         .select('*')
-        .eq('is_approved', true)
+        //.eq('is_approved', true)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -96,7 +96,7 @@ export default function GalleryPage() {
 
       if (dbError) throw dbError;
 
-      toast.success('Foto enviada com sucesso! Ela será exibida após aprovação.');
+      toast.success('Foto enviada com sucesso! Ela já está visível na galeria 🎉');
       setUploadForm({ name: "", caption: "", file: null });
       
       // Reset file input

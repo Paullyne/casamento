@@ -142,23 +142,38 @@ INSERT INTO public.wedding_events (
   dress_code, 
   additional_info
 ) VALUES (
-  'Isabella', 
-  'Gabriel', 
-  '2024-12-15 16:00:00+00', 
-  'Quinta da Regaleira', 
-  'R. Barbosa du Bocage 5, 2710-567 Sintra, Portugal', 
-  'Traje Social/Cocktail', 
-  'Cerimônia ao ar livre. Em caso de chuva, será realizada no salão coberto.'
+  'Pauline', 
+  'Albert', 
+  '2025-12-13 13:00:00+00', 
+  'Chácara Santa Clara - Dona Filó', 
+  'BR-120 - Dona Eusébia, Dona Euzébia - MG, 36784-000', 
+  'Traje Social/Esporte Fino', 
+  'Cerimônia ao ar livre. Em caso de chuva, não se preocupe, o ambiente estará protegido com tendas.'
 );
 
 -- Insert sample wedding gifts
 INSERT INTO public.wedding_gifts (name, description, price, qr_code_data) VALUES
-  ('Conjunto de Taças de Cristal', 'Conjunto elegante com 6 taças para champagne', 250.00, 'PIX_QR_CODE_DATA_1'),
-  ('Jogo de Cama King Size', 'Jogo de cama luxo em algodão egípcio', 380.00, 'PIX_QR_CODE_DATA_2'),
-  ('Panela de Pressão Elétrica', 'Panela de pressão elétrica 6L com múltiplas funções', 450.00, 'PIX_QR_CODE_DATA_3'),
-  ('Kit Café Gourmet', 'Kit com cafeteira italiana e grãos especiais', 180.00, 'PIX_QR_CODE_DATA_4'),
-  ('Aspirador de Pó Robot', 'Aspirador robô inteligente com mapeamento', 890.00, 'PIX_QR_CODE_DATA_5'),
-  ('Conjunto de Facas Profissionais', 'Kit com 8 facas alemãs de alta qualidade', 320.00, 'PIX_QR_CODE_DATA_6');
+  ('Velas Aromáticas', 'Velas aromáticas para disfarçar o cheiro da treta 🕯️🔥', 50.00, 'PIX_QR_CODE_DATA_1'),
+  ('Colchão Inflável', 'Colchão inflável de emergência — para quando alguém for “pro sofá” 🛏️➡️🛋️', 100.00, 'PIX_QR_CODE_DATA_2'),
+  ('Panela de Pressão Elétrica', 'Panela de pressão elétrica 6L com múltiplas funções, só pra evitar explodir a casa mesmo', 150.00, 'PIX_QR_CODE_DATA_3'),
+  ('Kit Café Gourmet', 'Kit com cafeteira italiana e grãos especiais. A noiva adora café!', 100.00, 'PIX_QR_CODE_DATA_4'),
+  ('Aspirador de Pó Robot', 'Aspirador robô inteligente com mapeamento. Tecnologia e ciência juntas, para ajudar a manter a casa habitável', 150.00, 'PIX_QR_CODE_DATA_5'),
+  ('Camiseta Homem', 'Camiseta “Sou sempre a razão” (edição para o noivo) 👕😏', 30.00, 'PIX_QR_CODE_DATA_5'),
+  ('Camiseta Mulher', 'Camiseta “Tenho razão, mas finjo que não” (edição para a noiva) 👚😉', 30.00, 'PIX_QR_CODE_DATA_6'),
+  ('Chocolate', 'Caixa de chocolates para dias de treta 🍫🔥', 50.00, 'PIX_QR_CODE_DATA_6'),
+  ('Spray Anti-Ciúmes', 'Spray anti-ciúmes (funciona 0%, mas a intenção conta)', 35.00, 'PIX_QR_CODE_DATA_6'),
+  ('Kit PAZ & AMOR', 'Kit “paz e amor” (válido para 1 discussão por mês) 🕊️💢', 40.00, 'PIX_QR_CODE_DATA_6'),
+  ('Cartões de “Passe Livre”', 'Pode usar para escapar de uma DR por mês (limitado) 🃏✋', 50.00, 'PIX_QR_CODE_DATA_6'),
+  ('Cofrinho', 'Cofrinho “arrependimentos instantâneos” 🐷😬', 20.00, 'PIX_QR_CODE_DATA_6'),
+  ('Vale Massagem', 'Vale-massagem vitalício (de preferência profissional, não amador) 💆‍♀️', 150.00, 'PIX_QR_CODE_DATA_6'),
+  ('Kit S.O.S', 'Kit “S.O.S. ressaca de lua de mel” 🍾🥴', 70.00, 'PIX_QR_CODE_DATA_6'),
+  ('Botão de Pausa', 'Botão de pausa para sogra (funciona só na imaginação) 🛑👵', 50.00, 'PIX_QR_CODE_DATA_6'),
+  ('Jogo de Panelas', 'Jogo de panelas anti-briga (com tampa que fecha a discussão) 🍳🫧', 250.00, 'PIX_QR_CODE_DATA_6'),
+  ('Varinha Mágica', 'Varinha mágica para transformar “Sim, Amor” em realidade 🪄😉', 50.00, 'PIX_QR_CODE_DATA_6'),
+  ('Extintor de DR', 'Extintor de DR (Discussão de Relacionamento) pra acabar de vez com aquela conversa chata 🧯❤️', 100.00, 'PIX_QR_CODE_DATA_6'),
+  ('Cueca da Sorte', 'Cueca boxer especial para trazer sorte para o noivo e fazer a noiva animar', 25.00, 'PIX_QR_CODE_DATA_6'),
+  ('Livro', 'Livro “Como não dormir de calça jeans depois da briga” 📖😤', 80.00, 'PIX_QR_CODE_DATA_6'),
+  ('Alarme de DR', 'Toca antes que alguém fale “precisamos conversar” 🚨🗣️', 50.00, 'PIX_QR_CODE_DATA_6');
 
 -- Create function to update timestamps
 CREATE OR REPLACE FUNCTION public.update_updated_at_column()

@@ -19,9 +19,9 @@ All colors MUST be HSL.
     --popover-foreground: 140 15% 15%;
 
     /* Sage Green Primary */
-    --primary: 135 40% 50%;
+    --primary: 135 45% 35%;
     --primary-foreground: 120 25% 99%;
-    --primary-glow: 135 45% 65%;
+    --primary-glow: 135 45% 45%;
 
     /* Light Green Secondary */
     --secondary: 125 30% 88%;
@@ -32,7 +32,7 @@ All colors MUST be HSL.
     --muted-foreground: 125 12% 45%;
 
     /* Forest Green Accent */
-    --accent: 140 35% 75%;
+    --accent: 140 35% 55%;
     --accent-foreground: 140 15% 15%;
 
     --destructive: 0 84.2% 60.2%;

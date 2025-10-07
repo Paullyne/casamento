@@ -23,7 +23,7 @@ export function WeddingNavigation() {
           <NavLink to="/" className="flex items-center space-x-2 group">
             <Heart className="h-6 w-6 text-primary group-hover:animate-pulse" />
             <span className="font-romantic text-xl font-semibold text-gradient-romantic">
-              Isabella & Gabriel
+              Albert & Pauline
             </span>
           </NavLink>
 

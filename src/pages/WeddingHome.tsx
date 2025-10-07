@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
-import weddingHero from "@/assets/wedding-hero.jpg";
+import weddingHero from "@/assets/wedding-hero6.jpg";
 import weddingRings from "@/assets/wedding-rings.jpg";
 
 interface WeddingEvent {
@@ -67,18 +67,18 @@ export default function WeddingHome() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat brightness-90 contrast-110"
         style={{ backgroundImage: `url(${weddingHero})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/60 to-accent/30"></div>
+        {/*<div className="absolute inset-0 bg-black/40 backdrop-brightness-75"></div>*/}
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-up">
           <div className="mb-8">
-            <Heart className="h-16 w-16 text-primary mx-auto mb-6 animate-romantic" />
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-romantic font-bold text-gradient-romantic mb-4">
+            <Heart className="h-16 w-16 text-primary mx-auto mb-6 animate-romantic" style={{ color: '#88E788' }}/>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-romantic font-bold text-gradient-romantic mb-4"style={{ color: '#88E788' }}>
               {weddingData.bride_name} & {weddingData.groom_name}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-elegant mb-8">
+            <p className="text-xl md:text-2xl font-elegant mb-8" style={{ color: '#88E788' }}>
               Celebrando nosso amor eterno
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function WeddingHome() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12 text-lg">
             <div className="flex items-center gap-2 text-foreground">
               <Calendar className="h-5 w-5 text-primary" />
-              <span className="font-elegant">
+              <span className="font-elegant" style={{ color: '#88E788' }}>
                 {weddingDate.toLocaleDateString('pt-BR', { 
                   weekday: 'long', 
                   year: 'numeric', 
@@ -97,7 +97,7 @@ export default function WeddingHome() {
             </div>
             <div className="flex items-center gap-2 text-foreground">
               <Clock className="h-5 w-5 text-primary" />
-              <span className="font-elegant">
+              <span className="font-elegant" style={{ color: '#88E788' }}>
                 {weddingDate.toLocaleTimeString('pt-BR', { 
                   hour: '2-digit', 
                   minute: '2-digit' 
@@ -106,7 +106,7 @@ export default function WeddingHome() {
             </div>
             <div className="flex items-center gap-2 text-foreground">
               <MapPin className="h-5 w-5 text-primary" />
-              <span className="font-elegant">{weddingData.venue_name}</span>
+              <span className="font-elegant" style={{ color: '#88E788' }}>{weddingData.venue_name}</span>
             </div>
           </div>
 
@@ -177,7 +177,7 @@ export default function WeddingHome() {
                   alt="Wedding rings" 
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+                {/*<div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>*/}
               </div>
             </div>
           </div>

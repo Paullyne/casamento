@@ -8,8 +8,8 @@ INSERT INTO public.wedding_events (
   dress_code,
   additional_info
 ) VALUES (
-  'Noiva',
-  'Noivo',
+  'Pauline',
+  'Albert',
   '2025-12-13T13:00:00-03:00',
   'Chácara Santa Clara (Dona Filó)',
   'BR-120 - Dona Eusébia, Dona Euzébia - MG, 36784-000',

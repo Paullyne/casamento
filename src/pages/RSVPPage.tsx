@@ -254,7 +254,7 @@ export default function RSVPPage() {
                     </FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Deixe uma mensagem carinhosa para Isabella e Gabriel..."
+                        placeholder="Deixe uma mensagem carinhosa para Albert e Pauline..."
                         className="min-h-24 text-base"
                         {...field}
                       />

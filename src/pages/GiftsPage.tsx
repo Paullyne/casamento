@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import weddingGifts from "@/assets/wedding-gifts.jpg";
+import { QRCodeCanvas } from "qrcode.react";
+
 
 interface WeddingGift {
   id: string;
@@ -17,6 +19,84 @@ interface WeddingGift {
   is_purchased: boolean;
   purchased_by: string | null;
   qr_code_data: string | null;
+  qr_code_image_url?: string | null;
+}
+
+function generatePixPayload(gift: any): string {
+  // ✅ Dados reais
+  const pixKey = "09261139680"; // cpf
+  const merchantName = "Pauline Cerqueira Barbosa"; // sem acentos nem caracteres especiais
+  const merchantCity = "Cataguases";               // sem acento
+  const amount = gift.price.toFixed(2);
+  const description = gift.name.substring(0, 25);   // até 25 caracteres
+
+  // 00 = Payload Format Indicator
+  const payloadFormat = "000201";
+
+  // 26 = Merchant Account Information (BR.GOV.BCB.PIX)
+  const gui = "BR.GOV.BCB.PIX";
+  const merchantAccountInfo =
+    "26" + (4 + gui.length + 2 + pixKey.length).toString().padStart(2, "0") +
+    "00" + gui.length.toString().padStart(2, "0") + gui +
+    "01" + pixKey.length.toString().padStart(2, "0") + pixKey;
+
+  // 52 = Merchant Category Code (0000)
+  const merchantCategoryCode = "52040000";
+
+  // 53 = Transaction Currency (986 = BRL)
+  const transactionCurrency = "5303986";
+
+  // 54 = Transaction Amount
+  const transactionAmount = "54" + amount.length.toString().padStart(2, "0") + amount;
+
+  // 58 = Country Code (BR)
+  const countryCode = "5802BR";
+
+  // 59 = Merchant Name
+  const sanitizedName = merchantName.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove acentos
+  const merchantNameField = "59" + sanitizedName.length.toString().padStart(2, "0") + sanitizedName;
+
+  // 60 = Merchant City
+  const sanitizedCity = merchantCity.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const merchantCityField = "60" + sanitizedCity.length.toString().padStart(2, "0") + sanitizedCity;
+
+  // 62 = Additional Data Field (Description)
+  const additionalDataField =
+    "62" + (description.length + 4).toString().padStart(2, "0") +
+    "05" + description.length.toString().padStart(2, "0") + description;
+
+  // 63 = CRC16
+  const crc16Header = "6304";
+
+  const payload =
+    payloadFormat +
+    merchantAccountInfo +
+    merchantCategoryCode +
+    transactionCurrency +
+    transactionAmount +
+    countryCode +
+    merchantNameField +
+    merchantCityField +
+    additionalDataField +
+    crc16Header;
+
+  return payload + crc16(payload);
+}
+
+function crc16(str: string): string {
+  let crc = 0xFFFF;
+  for (let c of str) {
+    crc ^= c.charCodeAt(0) << 8;
+    for (let i = 0; i < 8; i++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = (crc << 1) ^ 0x1021;
+      } else {
+        crc = crc << 1;
+      }
+      crc &= 0xFFFF;
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, "0");
 }
 
 export default function GiftsPage() {
@@ -129,15 +209,24 @@ export default function GiftsPage() {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative">
-                <div className="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
-                  <Gift className="h-16 w-16 text-primary/50 group-hover:text-primary transition-colors duration-300" />
-                </div>
-                {gift.is_purchased && (
-                  <Badge className="absolute top-4 right-4 bg-green-500 text-white">
+                <div className="h-48 relative overflow-hidden flex items-center justify-center bg-secondary/10">
+                  {gift.image_url ? (
+                    <img 
+                      src={gift.image_url} 
+                      alt={gift.name} 
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+              ) : (
+                    <Gift className="h-16 w-16 text-primary/50 group-hover:text-primary transition-colors duration-300" />
+              )}
+                  {gift.is_purchased && (
+                    <Badge className="absolute top-4 right-4 bg-green-500 text-white">
                     <CheckCircle className="h-3 w-3 mr-1" />
                     Reservado
-                  </Badge>
+                    </Badge>
                 )}
+              </div>
+
               </div>
               
               <div className="p-6">
@@ -153,57 +242,63 @@ export default function GiftsPage() {
                   </span>
                 </div>
 
-                {gift.is_purchased ? (
-                  <div className="text-center">
-                    <Badge variant="secondary" className="text-sm">
-                      Reservado por {gift.purchased_by}
-                    </Badge>
-                  </div>
-                ) : (
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button className="btn-hero w-full">
-                        <QrCode className="h-4 w-4 mr-2" />
-                        Presentear
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle className="font-romantic text-xl text-center">
-                          {gift.name}
-                        </DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-6">
-                        <div className="text-center">
-                          <p className="text-lg font-elegant mb-2">Valor: R$ {gift.price.toFixed(2)}</p>
-                          <p className="text-sm text-muted-foreground mb-4">
-                            Escaneie o QR Code abaixo para fazer a transferência PIX
-                          </p>
-                        </div>
-                        
-                        <div className="flex justify-center">
-                          <div className="w-48 h-48 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                            <QrCode className="h-24 w-24 text-primary/50" />
-                          </div>
-                        </div>
-                        
-                        <div className="text-center text-sm text-muted-foreground">
-                          <p>PIX: isabella.gabriel@casamento.com</p>
-                          <p className="mt-2">
-                            Chave PIX simulada para demonstração
-                          </p>
-                        </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="btn-hero w-full">
+                      <QrCode className="h-4 w-4 mr-2" />
+                      Presentear
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="font-romantic text-xl text-center">
+                      {gift.name}
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <p className="text-lg font-elegant mb-2">
+                        Valor: R$ {gift.price.toFixed(2)}
+                      </p>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Escaneie o QR Code abaixo para fazer a transferência PIX
+                      </p>
+                    </div>
 
-                        <Button 
-                          onClick={() => handlePurchaseGift(gift.id, gift.name)}
-                          className="btn-hero w-full"
-                        >
-                          Confirmar Presente
-                        </Button>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                    {/* QR Code PIX gerado automaticamente 
+                  <div className="flex justify-center">
+                    <div className="p-4 bg-white rounded-lg shadow-lg">
+                      <QRCodeCanvas 
+                        value={generatePixPayload(gift)} 
+                        size={200} 
+                        includeMargin={true}
+                      />
+                    </div>
+                  </div>*/}
+
+              {/* QR Code PIX estático (imagem manual) */}
+              <div className="flex justify-center">
+                {gift.qr_code_image_url ? (
+                  <img
+                    src={gift.qr_code_image_url}
+                    alt={`QR Code do presente ${gift.name}`}
+                    className="w-48 h-48 object-contain bg-white p-2 rounded-lg shadow-lg"
+                  />
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    QR Code não disponível
+                  </p>
                 )}
+              </div>
+
+                  <div className="text-center text-sm text-muted-foreground">
+                    <p>Escaneie com o app do seu banco para pagar via PIX</p>
+                  </div>
+
+                  </div>
+                </DialogContent>
+              </Dialog>
+
               </div>
             </Card>
           ))}
@@ -221,7 +316,7 @@ export default function GiftsPage() {
               escolher um presente não listado aqui.
             </p>
             <div className="text-center text-sm text-muted-foreground">
-              <p>PIX dos Noivos: <strong>isabella.gabriel@casamento.com</strong></p>
+              <p>PIX dos Noivos: <strong>32998456589</strong></p>
             </div>
           </Card>
         </div>

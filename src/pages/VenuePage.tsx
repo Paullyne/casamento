@@ -165,8 +165,8 @@ export default function VenuePage() {
                 <div>
                   <h3 className="font-elegant font-semibold text-foreground mb-2">Estacionamento</h3>
                   <p className="text-muted-foreground">
-                    O local possui estacionamento gratuito para todos os convidados. 
-                    Recomendamos chegar com antecedência para garantir uma vaga próxima.
+                    O local possui estacionamento amplo para todos os convidados. 
+                    Recomendamos chegar com antecedência para estacionar com tranquilidade.
                   </p>
                 </div>
               </div>
@@ -176,8 +176,8 @@ export default function VenuePage() {
                 <div>
                   <h3 className="font-elegant font-semibold text-foreground mb-2">Refeições</h3>
                   <p className="text-muted-foreground">
-                    Será servido jantar completo com opções vegetarianas e veganas. 
-                    Por favor, informe restrições alimentares no RSVP.
+                    Será servido um delicioso churrasco. 
+                    Por favor, informe restrições alimentares no RSVP, para que possamos preparar uma refeição que se adeque às suas necessidades.
                   </p>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function VenuePage() {
                   <h3 className="font-elegant font-semibold text-foreground mb-2">Contato do Local</h3>
                   <p className="text-muted-foreground">
                     Em caso de emergência ou dúvidas no dia do evento, 
-                    entre em contato com a coordenação do local.
+                    entre em contato com os organizadores.
                   </p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function VenuePage() {
               <Info className="h-8 w-8 text-primary mx-auto" />
               <h4 className="font-elegant font-semibold">Transporte</h4>
               <p className="text-sm text-muted-foreground">
-                Entre em contato conosco para mais informações
+                Caso necessário, temos contatos de motoristas confiáveis.
               </p>
             </div>
           </div>
