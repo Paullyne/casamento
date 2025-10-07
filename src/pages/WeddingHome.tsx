@@ -67,7 +67,7 @@ export default function WeddingHome() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-          className="relative h-screen flex items-center justify-center bg-cover bg-[position:50%_25%] sm:bg-center bg-no-repeat brightness-90 contrast-110"
+          className="relative h-screen flex items-center justify-center bg-contain sm:bg-cover bg-center bg-no-repeat sm:bg-no-repeat brightness-90 contrast-110"
           style={{ backgroundImage: `url(${weddingHero})` }}
       >
         {/*<div className="absolute inset-0 bg-black/40 backdrop-brightness-75"></div>*/}
