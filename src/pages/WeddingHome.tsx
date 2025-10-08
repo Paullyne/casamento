@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
-import weddingHero from "@/assets/wedding-hero66.jpeg";
+import weddingHero from "@/assets/wedding-hero.jpg";
 import weddingRings from "@/assets/wedding-rings.jpg";
 
 interface WeddingEvent {
@@ -67,74 +67,87 @@ export default function WeddingHome() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-          className="relative flex items-center justify-center min-h-screen bg-center bg-no-repeat brightness-90 contrast-110"
-  style={{
-    backgroundImage: `url(${weddingHero})`,
-    backgroundSize: "cover", // preenche no desktop
-  }}
+          className="relative min-h-screen flex items-center justify-center overflow-hidden"
 >
-  <div className="absolute inset-0 sm:hidden" 
-       style={{
-         backgroundImage: `url(${weddingHero})`,
-         backgroundSize: "100% 100%", // alonga no celular
-         backgroundPosition: "center",
-         backgroundRepeat: "no-repeat",
-         filter: "brightness(0.9) contrast(1.1)"
-       }}>
+  {/* Imagem de fundo responsiva */}
+  <div
+    className="absolute inset-0"
+    style={{
+      backgroundImage: `url(${weddingHero})`,
+      backgroundPosition: "center center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+    }}
+  ></div>
+
+  {/* Versão mobile (alongada) */}
+  <div
+    className="absolute inset-0 sm:hidden"
+    style={{
+      backgroundImage: `url(${weddingHero})`,
+      backgroundPosition: "center center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "100% 100%",
+    }}
+  ></div>
+
+  {/* Camada de escurecimento (opcional para contraste) */}
+  <div className="absolute inset-0 bg-black/40 sm:bg-black/30"></div>
+
+  {/* Conteúdo centralizado */}
+  <div className="relative z-10 text-center w-full flex flex-col items-center justify-center px-6">
+    <Heart
+      className="h-16 w-16 text-primary mb-6 animate-romantic"
+      style={{ color: "#C2FFC2" }}
+    />
+    <h1
+      className="text-4xl md:text-6xl lg:text-7xl font-romantic font-bold text-gradient-romantic mb-4"
+      style={{ color: "#C2FFC2" }}
+    >
+      {weddingData.bride_name} & {weddingData.groom_name}
+    </h1>
+    <p className="text-xl md:text-2xl font-elegant mb-8" style={{ color: "#C2FFC2" }}>
+      Celebrando nosso amor eterno
+    </p>
+
+    <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12 text-lg">
+      <div className="flex items-center gap-2 text-foreground">
+        <Calendar className="h-5 w-5 text-primary" />
+        <span className="font-elegant" style={{ color: "#C2FFC2" }}>
+          {weddingDate.toLocaleDateString("pt-BR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </span>
+      </div>
+      <div className="flex items-center gap-2 text-foreground">
+        <Clock className="h-5 w-5 text-primary" />
+        <span className="font-elegant" style={{ color: "#C2FFC2" }}>
+          {weddingDate.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </span>
+      </div>
+      <div className="flex items-center gap-2 text-foreground">
+        <MapPin className="h-5 w-5 text-primary" />
+        <span className="font-elegant" style={{ color: "#C2FFC2" }}>
+          {weddingData.venue_name}
+        </span>
+      </div>
+    </div>
+
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button asChild size="lg" className="btn-hero text-lg px-8 py-6">
+        <Link to="/rsvp">Confirmar Presença</Link>
+      </Button>
+      <Button asChild variant="outline" size="lg" className="btn-elegant text-lg px-8 py-6">
+        <Link to="/gifts">Ver Presentes</Link>
+      </Button>
+    </div>
   </div>
-
-  <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-up">
-    {/* Conteúdo das letras (nomes, data, hora etc.) */}
-  </div>
-        {/*<div className="absolute inset-0 bg-black/40 backdrop-brightness-75"></div>*/}
-        
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-up">
-          <div className="mb-8">
-            <Heart className="h-16 w-16 text-primary mx-auto mb-6 animate-romantic" style={{ color: '#88E788' }}/>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-romantic font-bold text-gradient-romantic mb-4"style={{ color: '#88E788' }}>
-              {weddingData.bride_name} & {weddingData.groom_name}
-            </h1>
-            <p className="text-xl md:text-2xl font-elegant mb-8" style={{ color: '#88E788' }}>
-              Celebrando nosso amor eterno
-            </p>
-          </div>
-
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12 text-lg">
-            <div className="flex items-center gap-2 text-foreground">
-              <Calendar className="h-5 w-5 text-primary" />
-              <span className="font-elegant" style={{ color: '#88E788' }}>
-                {weddingDate.toLocaleDateString('pt-BR', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-foreground">
-              <Clock className="h-5 w-5 text-primary" />
-              <span className="font-elegant" style={{ color: '#88E788' }}>
-                {weddingDate.toLocaleTimeString('pt-BR', { 
-                  hour: '2-digit', 
-                  minute: '2-digit' 
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-foreground">
-              <MapPin className="h-5 w-5 text-primary" />
-              <span className="font-elegant" style={{ color: '#88E788' }}>{weddingData.venue_name}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="btn-hero text-lg px-8 py-6">
-              <Link to="/rsvp">Confirmar Presença</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="btn-elegant text-lg px-8 py-6">
-              <Link to="/gifts">Ver Presentes</Link>
-            </Button>
-          </div>
-        </div>
       </section>
 
       {/* Countdown Section */}
