@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
-import weddingHero from "@/assets/wedding-hero6.jpg";
+import weddingHero from "@/assets/wedding-hero66.jpeg";
 import weddingRings from "@/assets/wedding-rings.jpg";
 
 interface WeddingEvent {
@@ -67,9 +67,25 @@ export default function WeddingHome() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-          className="relative h-screen flex items-center justify-center bg-contain sm:bg-cover bg-center bg-no-repeat sm:bg-no-repeat brightness-90 contrast-110"
-          style={{ backgroundImage: `url(${weddingHero})` }}
-      >
+          className="relative flex items-center justify-center min-h-screen bg-center bg-no-repeat brightness-90 contrast-110"
+  style={{
+    backgroundImage: `url(${weddingHero})`,
+    backgroundSize: "cover", // preenche no desktop
+  }}
+>
+  <div className="absolute inset-0 sm:hidden" 
+       style={{
+         backgroundImage: `url(${weddingHero})`,
+         backgroundSize: "100% 100%", // alonga no celular
+         backgroundPosition: "center",
+         backgroundRepeat: "no-repeat",
+         filter: "brightness(0.9) contrast(1.1)"
+       }}>
+  </div>
+
+  <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-up">
+    {/* Conteúdo das letras (nomes, data, hora etc.) */}
+  </div>
         {/*<div className="absolute inset-0 bg-black/40 backdrop-brightness-75"></div>*/}
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-up">
