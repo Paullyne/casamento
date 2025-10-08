@@ -87,7 +87,7 @@ export default function WeddingHome() {
       backgroundImage: `url(${weddingHero})`,
       backgroundPosition: "center center",
       backgroundRepeat: "no-repeat",
-      backgroundSize: "100% 100%",
+      backgroundSize: "cover",
     }}
   ></div>
 
